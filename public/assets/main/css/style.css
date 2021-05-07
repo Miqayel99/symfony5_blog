@@ -1,0 +1,14 @@
+.form-login{
+    width: 80%;
+    padding: 30px;
+    border-radius: 5px;
+    margin: auto;
+}
+.form-login input{
+    text-align: center;
+}
+
+::placeholder{
+    width:100%;
+    text-align: center;
+}
