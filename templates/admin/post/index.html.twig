@@ -1,0 +1,68 @@
+{% extends 'admin/adminbase.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+    <div class="row no-gutters">
+        <div class="col-12">
+            <h1 class="display-4 text-center mt-5">
+                {{ title }}
+            </h1>
+        </div>
+    </div>
+    <div class="container">
+    <div class="row no-gutters mt-2">
+        {%  if check_category is not empty %}
+            <div class="col-12">
+                <a href="{{ path('admin_post_create') }}" class="btn btn-success">Create new post</a><hr>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="container">
+    <div class="row no-gutters justify-content-center mt-3">
+        <div class="col-8 ">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="container">
+    <div class="row no-gutters">
+        <div class="col-12">
+            {%  if check_category is  empty %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <p>Can't create post without category</p>
+                    <hr>
+                    <a href="{{ path('admin_category_create') }}">
+                        Create category
+                    </a>
+                </div>
+                {% else %}
+            <h2>Posts list</h2>
+            <ul>
+                {% for post_item in post %}
+                    <li>
+                        <img src="{{ asset('/uploads/post/') }}{{ post_item.image }}"
+                             style="width: 200px"
+                             alt="">
+                        {{ post_item.title }}
+                        <a class="btn-link"
+                           href="{{ path('admin_post_update', {'id': post_item.id}) }}">
+                            update
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            {% endif %}
+        </div>
+    </div>
+
+
+
+{% endblock %}
